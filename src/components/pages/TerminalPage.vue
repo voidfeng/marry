@@ -70,16 +70,25 @@ const handleEnter = () => {
   // 播放背景音乐（需要用户交互才能播放）
   playBackgroundMusic()
 
-  // 老式电视机关机效果
-  const terminal = document.querySelector('.terminal-container')
-  if (terminal) {
-    gsap.to(terminal, {
+  // 老式电视机关机效果 - 应用到整个页面
+  const terminalPage = document.querySelector('.terminal-page')
+  if (terminalPage) {
+    // 添加白光闪烁效果
+    gsap.to(terminalPage, {
+      backgroundColor: '#ffffff',
+      duration: 0.3,
+      ease: 'power2.in',
+    })
+
+    // 垂直收缩成一条线
+    gsap.to(terminalPage, {
       scaleY: 0.01,
       scaleX: 1,
       duration: 0.5,
       ease: 'power4.in',
       onComplete: () => {
-        gsap.to(terminal, {
+        // 水平收缩消失
+        gsap.to(terminalPage, {
           scaleX: 0,
           duration: 0.2,
           onComplete: () => {
@@ -87,13 +96,6 @@ const handleEnter = () => {
           },
         })
       },
-    })
-
-    // 添加白光闪烁效果
-    gsap.to('.terminal-screen', {
-      backgroundColor: '#ffffff',
-      duration: 0.3,
-      ease: 'power2.in',
     })
   }
 }
@@ -151,7 +153,7 @@ onMounted(() => {
             <span class="btn btn-minimize"></span>
             <span class="btn btn-maximize"></span>
           </div>
-          <div class="terminal-title">root@groom-macbook:~$</div>
+          <div class="terminal-title">root@jay-mac:~$</div>
         </div>
 
         <div class="terminal-body">
@@ -208,6 +210,7 @@ onMounted(() => {
   position: relative;
   overflow: hidden;
   cursor: default;
+  transform-origin: center center;
 }
 
 .terminal-background {
@@ -221,8 +224,9 @@ onMounted(() => {
 
 .terminal-container {
   width: 90%;
+  height: 80vh;
   max-width: 800px;
-  background: rgba(15, 20, 35, 0.95);
+  background: rgba(15, 20, 35, 0.9);
   border-radius: 10px;
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.8),
@@ -234,7 +238,7 @@ onMounted(() => {
 }
 
 .terminal-screen {
-  background: #0f1423;
+  /* background: #0f1423; */
   font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
   color: #00ff00;
 }
