@@ -6,8 +6,10 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 
 import TerminalPage from './components/pages/TerminalPage.vue'
-import CoverPage from './components/pages/CoverPage.vue'
-import PhotoPage from './components/pages/PhotoPage.vue'
+import Photo1Page from './components/pages/Photo1Page.vue'
+import Photo2Page from './components/pages/Photo2Page.vue'
+import Photo3Page from './components/pages/Photo3Page.vue'
+import Photo4Page from './components/pages/Photo4Page.vue'
 import InfoPage from './components/pages/InfoPage.vue'
 import MapPage from './components/pages/MapPage.vue'
 
@@ -19,98 +21,24 @@ const onTerminalComplete = () => {
   showTerminal.value = false
 }
 
-// 定义页面类型
-interface CoverPageData {
-  type: 'cover'
-  title: string
-  subtitle: string
-  names: string
-  date: string
-}
-
-interface PhotoPageData {
-  type: 'photo'
-  image: string
-  caption: string
-}
-
-interface InfoPageData {
-  type: 'info'
-  title: string
-  time: string
-  location: string
-  address: string
-}
-
-interface MapPageData {
-  type: 'map'
-  title: string
-  address: string
-  lat: number
-  lng: number
-}
-
-type PageData = CoverPageData | PhotoPageData | InfoPageData | MapPageData
-
 // Swiper 模块
 const modules = [Pagination, Mousewheel]
 
-// 页面数据
-const pages: PageData[] = [
-  {
-    type: 'cover',
-    title: '我们结婚了',
-    subtitle: '诚挚邀请您的到来',
-    names: '新郎 & 新娘',
-    date: '2024年12月31日',
-  },
-  {
-    type: 'photo',
-    image: 'https://picsum.photos/800/1200?random=1',
-    caption: '相识',
-  },
-  {
-    type: 'photo',
-    image: 'https://picsum.photos/800/1200?random=2',
-    caption: '相知',
-  },
-  {
-    type: 'photo',
-    image: 'https://picsum.photos/800/1200?random=3',
-    caption: '相爱',
-  },
-  {
-    type: 'photo',
-    image: 'https://picsum.photos/800/1200?random=4',
-    caption: '相伴',
-  },
-  {
-    type: 'info',
-    title: '婚礼信息',
-    time: '2024年12月31日 12:00',
-    location: 'XX大酒店 宴会厅',
-    address: '北京市朝阳区XXX街道XXX号',
-  },
-  {
-    type: 'map',
-    title: '婚礼地点',
-    address: '北京市朝阳区XXX街道XXX号',
-    lat: 39.9042,
-    lng: 116.4074,
-  },
-]
+// 信息页数据
+const infoPage = {
+  title: '婚礼信息',
+  time: '2024年12月31日 12:00',
+  location: 'XX大酒店 宴会厅',
+  address: '北京市朝阳区XXX街道XXX号',
+}
 
-// 获取封面页数据
-const coverPage = pages[0] as CoverPageData
-
-// 获取照片页数据
-const photoPages = pages.slice(1, -2).filter((p): p is PhotoPageData => p.type === 'photo')
-
-// 获取信息页数据
-const infoPage = pages[pages.length - 2] as InfoPageData
-
-// 获取地图页数据
-const mapPage = pages[pages.length - 1] as MapPageData
+// 地图页数据
+const mapPage = {
+  title: '婚礼地点',
+  address: '北京市朝阳区XXX街道XXX号',
+  lat: 39.9042,
+  lng: 116.4074,
+}
 </script>
 
 <template>
@@ -121,7 +49,7 @@ const mapPage = pages[pages.length - 1] as MapPageData
     </Transition>
 
     <!-- 主内容（轮播页面） -->
-    <div v-show="!showTerminal" class="main-content">
+    <div v-if="!showTerminal" class="main-content">
       <Swiper
         :modules="modules"
         direction="vertical"
@@ -131,19 +59,53 @@ const mapPage = pages[pages.length - 1] as MapPageData
         :pagination="{ clickable: true }"
         class="wedding-swiper"
       >
-        <!-- 封面页 -->
+        <!-- 照片页 -->
         <SwiperSlide>
-          <CoverPage
-            :title="coverPage.title"
-            :subtitle="coverPage.subtitle"
-            :names="coverPage.names"
-            :date="coverPage.date"
-          />
+          <Photo1Page />
         </SwiperSlide>
 
-        <!-- 照片页 -->
-        <SwiperSlide v-for="(page, index) in photoPages" :key="`photo-${index}`">
-          <PhotoPage :image="page.image" :caption="page.caption" />
+        <SwiperSlide>
+          <Photo2Page />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Photo3Page />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Photo4Page />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Photo5Page />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Photo6Page />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Photo7Page />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Photo8Page />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Photo9Page />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Photo10Page />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Photo11Page />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Photo12Page />
         </SwiperSlide>
 
         <!-- 信息页 -->
